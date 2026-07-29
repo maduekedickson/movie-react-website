@@ -52,3 +52,7 @@ jobs:
           # Add the server's public key to known_hosts to allow rsync to connect
           ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
           rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa" dist/ "$SSH_USER@$SSH_HOST:/var/www/html/"
+      - name: Run build
+        env:
+          VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
+        run: npm run build
