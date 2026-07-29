@@ -59,7 +59,7 @@ const Home = () => {
             <h2 className="mt-2 text-3xl font-semibold text-white">Popular movies</h2>
           </div>
           <p className="max-w-xl text-sm text-slate-400">
-            Browse the latest popular movie cards rendered from TMDB API and ready for production deployment.
+            Browse the latest popular movie cards rendered from TMDB API and ready for production deployment. Thank You.
           </p>
         </div>
 
