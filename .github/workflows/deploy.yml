@@ -49,4 +49,6 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          rsync -avz --delete dist/ "$SSH_USER@$SSH_HOST:/var/www/html/"
+          # Add the server's public key to known_hosts to allow rsync to connect
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa" dist/ "$SSH_USER@$SSH_HOST:/var/www/html/"
