@@ -20,10 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Inject API keys here so Vite bundles them into the dist/ folder
+      # Passes both TMDB secrets to Vite during build time
       - name: Run build
         env:
           VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
+          VITE_TMDB_API_READ_ACCESS_TOKEN: ${{ secrets.VITE_TMDB_API_READ_ACCESS_TOKEN }}
         run: npm run build
 
       - name: Upload build artifacts
@@ -52,6 +53,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          
+          # Add EC2 public key to known_hosts to fix host verification error
           ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
-          # Added --no-t to prevent "failed to set times" permission errors on /var/www/html
+          
+          # Sync dist files to EC2 without timestamp updates to prevent permission errors
           rsync -rlptvz --no-t --delete -e "ssh -i ~/.ssh/id_rsa" dist/ "$SSH_USER@$SSH_HOST:/var/www/html/"
