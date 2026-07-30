@@ -6,7 +6,7 @@ const About = () => (
       <div className="flex flex-col gap-4 text-slate-100 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm uppercase tracking-[0.24em] text-sky-300">About Movie Explorer</p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-tight">Modern frontend CI/CD showcase</h1>
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight">Modern frontend CI/CD Pipeline showcase</h1>
         </div>
         <div className="inline-flex items-center gap-2 rounded-3xl bg-slate-950 px-5 py-3 text-slate-300 ring-1 ring-slate-700">
           <Sparkles className="h-5 w-5 text-sky-400" />
